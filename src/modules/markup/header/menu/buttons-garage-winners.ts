@@ -1,0 +1,25 @@
+import { createDomNode } from "../../base/base";
+import { menu } from "./wrapper-menu";
+
+export const descriptionMenuGarageWinners = {
+  typeElement: "div",
+  className: "wrapper-menu__wrapper-buttons-garage-winners",
+  parentElement: menu,
+};
+const MenuGarageWinners = createDomNode(descriptionMenuGarageWinners);
+
+const descriptionInputGarage = {
+  typeElement: "button",
+  className: "wrapper-buttons-garage-winners__button-garage",
+  text: "Garage",
+  parentElement: MenuGarageWinners,
+};
+const inputGarage = createDomNode(descriptionInputGarage);
+
+const descriptionInputUpdate = {
+  typeElement: "button",
+  className: "wrapper-buttons-garage-winners__button-update",
+  text: "Update",
+  parentElement: MenuGarageWinners,
+};
+const inputUpdate = createDomNode(descriptionInputUpdate);

@@ -1,0 +1,25 @@
+body {
+    background-image: url(../../../assets/img/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-clip: padding-box;
+}
+
+.car-container__wrapper-road-car {
+    height: 3rem;
+    background-color: #00b2ff33;
+    border-bottom: dotted #dac6cb6e;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.wrapper-road-car_car {
+    height: 2rem;
+    width: 3rem;
+    flex-basis: 100%;
+    background-image: url(../../../assets/svg/car.svg);
+    background-repeat: no-repeat;
+
+}
