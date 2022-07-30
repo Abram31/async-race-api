@@ -4,22 +4,46 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-clip: padding-box;
+    color: whitesmoke;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.wrapper-cars {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .car-container__wrapper-road-car {
+    position: relative;
     height: 3rem;
-    background-color: #00b2ff33;
+    /* background-color: #00b2ff33; */
     border-bottom: dotted #dac6cb6e;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+
+}
+
+.car-container__wrapper-road-car::after {
+    content: url(../../../assets/svg/flag.svg);
+    position: absolute;
+    right: 10%;
 }
 
 .wrapper-road-car_car {
     height: 2rem;
     width: 3rem;
     flex-basis: 100%;
-    background-image: url(../../../assets/svg/car.svg);
-    background-repeat: no-repeat;
+    /* background-image: url(../../../assets/svg/car.svg); */
+    mask: url(../../../assets/svg/car.svg);
+    mask-repeat: no-repeat;
+    background-color: greenyellow;
+    /* background-repeat: no-repeat; */
 
 }
