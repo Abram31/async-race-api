@@ -1,3 +1,7 @@
+import allCarsRun from '../../animation/all-cars-race';
+import allCarsResset from '../../animation/all-cars-reset';
+import { animateRun } from '../../animation/animation-run';
+import distanceReset from '../../animation/distance-reset';
 import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../fetch/fetch';
@@ -13,6 +17,24 @@ body.addEventListener('click', (event) => {
   }
   if (element.classList.contains('wrapper-buttons__button-generate-cars')) {
     generateCars();
+  }
+  if (element.classList.contains('wrapper-start-back__button-start')) {
+    const elem = event.target as HTMLElement;
+    const carId = elem.closest('section')?.id;
+    console.log(carId);
+    animateRun(event);
+  }
+  if (element.classList.contains('wrapper-start-back__button-back')) {
+    const elem = event.target as HTMLElement;
+    const carId = elem.closest('section')?.id;
+    console.log(carId);
+    distanceReset(event);
+  }
+  if (element.classList.contains('wrapper-buttons__button-race')) {
+    allCarsRun();
+  }
+  if (element.classList.contains('wrapper-buttons__button-resset')) {
+    allCarsResset();
   }
 });
 
@@ -52,6 +74,7 @@ export interface IcarsCreate {
   id: number;
   color: string;
   name: string;
+  velocity: number;
 }
 
 export const carsCreate = (data: IcarsCreate[]) => {

@@ -22,6 +22,7 @@ export const GET_URL: IBase_URL = {
 
 // eslint-disable-next-line import/no-mutable-exports
 export let BASE_DATA: IcarsCreate[];
+export let aboutCar: IcarsCreate;
 
 export const fetchRequest = async ({
   baseUrl,
@@ -34,7 +35,7 @@ export const fetchRequest = async ({
 }: IBase_URL) => {
   try {
     let response;
-    if (method === 'GET' || method === 'PATCH') {
+    if (method === 'GET') {
       response = await fetch(`${baseUrl}${additionalURL}`);
     } else {
       response = await fetch(`${baseUrl}${additionalURL}`, {
@@ -45,7 +46,11 @@ export const fetchRequest = async ({
       });
     }
     const json = await response?.json();
-    BASE_DATA = Array.isArray(json) ? json : [];
+    if (Array.isArray(json)) {
+      BASE_DATA = json;
+    } else {
+      aboutCar = json;
+    }
     // const titleGarage = document.querySelector('.title-garage') as HTMLHRElement;
     // titleGarage.innerText = `Garage: (${String(json.length)})`;
 
