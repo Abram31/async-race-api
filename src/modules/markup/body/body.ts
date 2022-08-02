@@ -6,6 +6,7 @@ import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../fetch/fetch';
 import { createDomNode } from '../base/base';
+import pagination from '../footer/pagination';
 import { createNewCar, generateCars, removeCar } from '../header/menu/create-update';
 
 const body = document.querySelector('body') as HTMLElement;
@@ -36,6 +37,9 @@ body.addEventListener('click', (event) => {
   if (element.classList.contains('wrapper-buttons__button-resset')) {
     allCarsResset();
   }
+  if (element.classList.contains('wrapper-buttons__button-next') || element.classList.contains('wrapper-buttons__button-prev')) {
+    pagination(event);
+  }
 });
 
 const descriptionMain = {
@@ -43,7 +47,7 @@ const descriptionMain = {
   className: 'main',
   parentElement: body,
 };
-const main = createDomNode(descriptionMain);
+export const main = createDomNode(descriptionMain);
 
 const descriptionH3 = {
   typeElement: 'h3',
@@ -79,13 +83,27 @@ export interface IcarsCreate {
 
 export const carsCreate = (data: IcarsCreate[]) => {
   wrapperCars.innerHTML = '';
+  let currentPage: HTMLElement;
   if (data) {
-    data.forEach(({ id, color, name }: IcarsCreate) => {
+    data.forEach(({ id, color, name }: IcarsCreate, index: number) => {
+      if (index === 0 || index % 6 === 0) {
+        const pageNumber = (index / 6) + 1;
+        const descriptionPage = {
+          id: `Page № ${pageNumber}`,
+          typeElement: 'section',
+          className: 'wrapper-cars__page',
+          parentElement: wrapperCars,
+        };
+        currentPage = createDomNode(descriptionPage);
+        if (index === 0) {
+          currentPage.style.display = 'block';
+        }
+      }
       const descriptionConteinerCar = {
         id: String(id),
         typeElement: 'section',
         className: 'wrapper-cars__car-container',
-        parentElement: wrapperCars,
+        parentElement: currentPage,
       };
       const conteinerCars = createDomNode(descriptionConteinerCar);
 

@@ -2,6 +2,7 @@
 import {
   aboutCar, BASE_DATA, fetchRequest, IBase_URL,
 } from '../fetch/fetch';
+import highestSpeed from '../winners/highest-speed';
 import distanceReset from './distance-reset';
 
 interface IanimateRun {
@@ -11,8 +12,7 @@ interface IanimateRun {
     timing: number;
 }
 
-const historyAnimations = new Map();
-
+export const speedHistory: Map<string, string> = new Map();
 // eslint-disable-next-line import/prefer-default-export
 export function animateRun(event: MouseEvent) {
   // eslint-disable-next-line no-unused-vars
@@ -20,7 +20,7 @@ export function animateRun(event: MouseEvent) {
   let speedCar: number;
 
   const elem = event.target as HTMLElement;
-  const carId = elem.closest('section')?.id;
+  const carId: string = (elem.closest('section') as HTMLElement)?.id;
 
   const section = document.getElementById(`${carId}`) as HTMLDivElement;
   const animationDiv = section.querySelector('.wrapper-road-car_car') as HTMLDivElement;
@@ -37,28 +37,33 @@ export function animateRun(event: MouseEvent) {
       method: 'PATCH',
     },
   };
+  const descriptionDriveRequest: IBase_URL = {
+    baseUrl: 'http://localhost:3000',
+    additionalURL: `/engine?id=${carId}&status=drive`,
+    params: {
+      method: 'PATCH',
+    },
+  };
 
   fetchRequest(descriptionStartRequest).then(() => {
     const data = aboutCar;
     speedCar = data.velocity;
-    time = 100 / speedCar;
+    time = (90 / (speedCar / 500)) / 60;
+    speedHistory.set(carId, String(speedCar));
+    console.log(speedHistory);
+    fetchRequest(descriptionDriveRequest);
   });
 
   const animation = () => {
     const valueFlexBasic = getComputedStyle(animationDiv).flexBasis.slice(0, -1);
     if (Number(valueFlexBasic) > 10) {
-      animationDiv.style.flexBasis = `${Number(valueFlexBasic) - (10 / speedCar)}%`;
+      animationDiv.style.flexBasis = `${Number(valueFlexBasic) - (speedCar / 500)}%`;
 
       const idAnimation = window.requestAnimationFrame(animation);
       animationDiv.id = `Animation № ${idAnimation}`;
-    //   if (!historyAnimations.get(idAnimation)) {
-    //     historyAnimations.set(idAnimation, idAnimation);
-    //     console.log(historyAnimations);
+    } else {
+      highestSpeed(speedHistory);
     }
-    // } else if (Number(valueFlexBasic) <= 10) {
-    //   historyAnimations.delete(idAnimation);
-    //   console.log(historyAnimations);
-    // }
   };
   window.requestAnimationFrame(animation);
 }

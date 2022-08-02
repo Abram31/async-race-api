@@ -58,8 +58,12 @@ export const fetchRequest = async ({
     // mainH3.innerText = `Garage: (${String(json.length)})`;
 
     console.log(json);
-  } catch {
-    console.error(Error('fetch'));
+  } catch (error) {
+    let message = 'Unknown Error';
+    if (error instanceof Error) message = error.message;
+    // we'll proceed, but let's report it
+    console.log(message);
+    
   }
 };
 fetchRequest(GET_URL);

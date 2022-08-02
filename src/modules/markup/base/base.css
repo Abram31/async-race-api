@@ -1,4 +1,7 @@
 body {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
     background-image: url(../../../assets/img/background.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -12,7 +15,9 @@ main {
     flex-direction: column;
     gap: 1rem;
 }
-
+.wrapper-cars__page {
+    display: none;
+}
 .wrapper-cars {
     display: flex;
     flex-direction: column;
@@ -46,4 +51,17 @@ main {
     background-color: greenyellow;
     /* background-repeat: no-repeat; */
 
+}
+
+.title-winner {
+position: fixed;
+    left: 0;
+    right: 0;
+    /* bottom: 0; */
+    top: 50%;
+    /* display: block; */
+    text-align: center;
+    font-size: 3rem;
+    box-shadow: 0rem 0rem 4rem 1px #d53c3e;
+    color: #b84b25;
 }
