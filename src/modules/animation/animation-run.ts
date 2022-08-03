@@ -46,12 +46,15 @@ export function animateRun(event: MouseEvent) {
   };
 
   fetchRequest(descriptionStartRequest).then(() => {
-    const data = aboutCar;
-    speedCar = data.velocity;
-    time = (90 / (speedCar / 500)) / 60;
-    speedHistory.set(carId, String(speedCar));
-    console.log(speedHistory);
-    fetchRequest(descriptionDriveRequest);
+    if (!(aboutCar instanceof Response)) {
+      const data = aboutCar;
+      speedCar = data.velocity;
+      time = (90 / (speedCar / 500)) / 60;
+      speedHistory.set(carId, String(speedCar));
+      console.log(speedHistory);
+    }
+  }).then(async () => {
+    await fetchRequest(descriptionDriveRequest);
   });
 
   const animation = () => {

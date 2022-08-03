@@ -1,13 +1,16 @@
 import allCarsRun from '../../animation/all-cars-race';
 import allCarsResset from '../../animation/all-cars-reset';
 import { animateRun } from '../../animation/animation-run';
+import carStop from '../../animation/car-stop';
 import distanceReset from '../../animation/distance-reset';
 import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../fetch/fetch';
 import { createDomNode } from '../base/base';
 import pagination from '../footer/pagination';
-import { createNewCar, generateCars, removeCar } from '../header/menu/create-update';
+import { createNewCar, selectCar, updateCar } from '../header/menu/create-update';
+import removeCar from '../header/menu/delete-car';
+import generateCars from '../header/menu/generate-cars';
 
 const body = document.querySelector('body') as HTMLElement;
 body.addEventListener('click', (event) => {
@@ -29,7 +32,8 @@ body.addEventListener('click', (event) => {
     const elem = event.target as HTMLElement;
     const carId = elem.closest('section')?.id;
     console.log(carId);
-    distanceReset(event);
+    carStop(event);
+    // distanceReset(event);
   }
   if (element.classList.contains('wrapper-buttons__button-race')) {
     allCarsRun();
@@ -39,6 +43,12 @@ body.addEventListener('click', (event) => {
   }
   if (element.classList.contains('wrapper-buttons__button-next') || element.classList.contains('wrapper-buttons__button-prev')) {
     pagination(event);
+  }
+  if (element.classList.contains('wrapper-buttons-select-remove__select')) {
+    selectCar(event);
+  }
+  if (element.classList.contains('menu-wrapper-update__button')) {
+    updateCar(event);
   }
 });
 

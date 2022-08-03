@@ -2,10 +2,8 @@ import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../../fetch/fetch';
 import { createDomNode } from '../../base/base';
-import { carsCreate } from '../../body/body';
+import { carsCreate, main } from '../../body/body';
 import menu from './wrapper-menu';
-
-import * as dataCars from '../../body/cars.json';
 
 const descriptionMenuWrapperInputs = {
   typeElement: 'div',
@@ -114,63 +112,96 @@ export const createNewCar = (event: MouseEvent) => {
   return event;
 };
 
+export const selectCar = (event: MouseEvent) => {
+  const selectButton = event.target as HTMLElement;
+  const allSelectButtons = document.querySelectorAll('.wrapper-buttons-select-remove__select');
+  if (!selectButton.classList.contains('on')) {
+    allSelectButtons?.forEach((select) => {
+      (select as HTMLElement).classList.remove('on');
+      // eslint-disable-next-line no-param-reassign
+      (select as HTMLElement).style.background = 'white';
+    });
+    selectButton.classList.add('on');
+    selectButton.style.background = 'red';
+  } else {
+    selectButton.classList.remove('on');
+    selectButton.style.background = 'white';
+  }
+  const carId = selectButton.closest('section')?.id;
+};
+
+export const updateCar = (event:MouseEvent) => {
+  const butonUpdate = event.target as HTMLElement;
+  const inputValue = (document.querySelector('.menu-wrapper-update__input') as HTMLInputElement).value;
+  const color = (document.querySelector('.menu-wrapper-update__input-color') as HTMLInputElement).value;
+
+  const selectElement = main.querySelector('.on');
+  const sectionCar = selectElement?.closest('section');
+  const сar = sectionCar?.querySelector('.wrapper-road-car_car') as HTMLDivElement;
+  const nameCar = sectionCar?.querySelector('.wrapper-buttons-select-remove__h4') as HTMLDivElement;
+  nameCar.textContent = inputValue;
+  сar.style.backgroundColor = color;
+  
+  console.log(selectElement);
+};
+
 // --------------------------------Delete Car --------------------------------------------------------------------
 
-export const removeCar = (event: MouseEvent) => {
-  const element = event.target as HTMLElement;
-  const carId = element.closest('section')?.id;
-  const DELETE_URL: IBase_URL = {
-    baseUrl: 'http://localhost:3000',
-    additionalURL: `/garage/${carId}`,
-    params: {
-      method: 'DELETE',
-    },
-  };
-  fetchRequest(DELETE_URL).then(() => {
-    console.log(BASE_DATA);
+// export const removeCar = (event: MouseEvent) => {
+//   const element = event.target as HTMLElement;
+//   const carId = element.closest('section')?.id;
+//   const DELETE_URL: IBase_URL = {
+//     baseUrl: 'http://localhost:3000',
+//     additionalURL: `/garage/${carId}`,
+//     params: {
+//       method: 'DELETE',
+//     },
+//   };
+//   fetchRequest(DELETE_URL).then(() => {
+//     console.log(BASE_DATA);
 
-    fetchRequest(GET_URL).then(() => {
-      carsCreate(BASE_DATA);
-    });
-  });
-};
+//     fetchRequest(GET_URL).then(() => {
+//       carsCreate(BASE_DATA);
+//     });
+//   });
+// };
 
 // ----------------------------------------------Generate Car--------------------------------
-export const generateCars = async () => {
-  const cars = JSON.parse(JSON.stringify(dataCars));
-  const nameCars = Object.keys(cars.list);
-  // eslint-disable-next-line max-len
-  const getRandomArbitrary = (min:number, max:number):number => Math.round(Math.random() * (max - min) + min);
-  async function generate100RequestsToCar() {
-    for (let i = 0; i < 100; i += 1) {
-      const numberCarBrand = getRandomArbitrary(0, nameCars.length - 1);
-      const carBrand: string = nameCars[numberCarBrand];
-      const listCarModels = cars.list[carBrand];
-      const numCarModel = getRandomArbitrary(0, listCarModels.length - 1);
-      const carModel = listCarModels[numCarModel];
-      const carColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+// export const generateCars = async () => {
+//   const cars = JSON.parse(JSON.stringify(dataCars));
+//   const nameCars = Object.keys(cars.list);
+//   // eslint-disable-next-line max-len
+//   const getRandomArbitrary = (min:number, max:number):number => Math.round(Math.random() * (max - min) + min);
+//   async function generate100RequestsToCar() {
+//     for (let i = 0; i < 100; i += 1) {
+//       const numberCarBrand = getRandomArbitrary(0, nameCars.length - 1);
+//       const carBrand: string = nameCars[numberCarBrand];
+//       const listCarModels = cars.list[carBrand];
+//       const numCarModel = getRandomArbitrary(0, listCarModels.length - 1);
+//       const carModel = listCarModels[numCarModel];
+//       const carColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-      const propetiesNewCar = {
-        name: `${carBrand} ${carModel}`,
-        color: carColor,
-      };
+//       const propetiesNewCar = {
+//         name: `${carBrand} ${carModel}`,
+//         color: carColor,
+//       };
 
-      // eslint-disable-next-line camelcase
-      const create_POST_REQUEST: IBase_URL = {
-        baseUrl: 'http://localhost:3000',
-        additionalURL: '/garage',
-        params: {
-          method: 'POST',
-          header: { 'Content-Type': 'application/json' },
-          bodyData: JSON.stringify(propetiesNewCar),
-        },
-      };
-      // eslint-disable-next-line no-await-in-loop
-      await fetchRequest(create_POST_REQUEST);
-    }
-  }
-  await generate100RequestsToCar();
-  fetchRequest(GET_URL).then(() => {
-    carsCreate(BASE_DATA);
-  });
-};
+//       // eslint-disable-next-line camelcase
+//       const create_POST_REQUEST: IBase_URL = {
+//         baseUrl: 'http://localhost:3000',
+//         additionalURL: '/garage',
+//         params: {
+//           method: 'POST',
+//           header: { 'Content-Type': 'application/json' },
+//           bodyData: JSON.stringify(propetiesNewCar),
+//         },
+//       };
+//       // eslint-disable-next-line no-await-in-loop
+//       await fetchRequest(create_POST_REQUEST);
+//     }
+//   }
+//   await generate100RequestsToCar();
+//   fetchRequest(GET_URL).then(() => {
+//     carsCreate(BASE_DATA);
+//   });
+// };

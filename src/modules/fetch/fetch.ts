@@ -1,4 +1,6 @@
 // import fetch, { RequestInit } from 'node-fetch';
+import carBroken from '../animation/car-broken';
+import carStop from '../animation/car-broken';
 import { IcarsCreate, mainH3 } from '../markup/body/body';
 
 export interface IBase_URL {
@@ -22,7 +24,8 @@ export const GET_URL: IBase_URL = {
 
 // eslint-disable-next-line import/no-mutable-exports
 export let BASE_DATA: IcarsCreate[];
-export let aboutCar: IcarsCreate;
+// eslint-disable-next-line import/no-mutable-exports
+export let aboutCar: IcarsCreate | Response;
 
 export const fetchRequest = async ({
   baseUrl,
@@ -33,8 +36,8 @@ export const fetchRequest = async ({
     bodyData,
   },
 }: IBase_URL) => {
+  let response;
   try {
-    let response;
     if (method === 'GET') {
       response = await fetch(`${baseUrl}${additionalURL}`);
     } else {
@@ -51,19 +54,15 @@ export const fetchRequest = async ({
     } else {
       aboutCar = json;
     }
-    // const titleGarage = document.querySelector('.title-garage') as HTMLHRElement;
-    // titleGarage.innerText = `Garage: (${String(json.length)})`;
-
-    // titleGarage.innerText = `Garage: (${String(json.length)})`;
-    // mainH3.innerText = `Garage: (${String(json.length)})`;
-
-    console.log(json);
-  } catch (error) {
-    let message = 'Unknown Error';
-    if (error instanceof Error) message = error.message;
-    // we'll proceed, but let's report it
-    console.log(message);
-    
+  } catch {
+    if (response instanceof Response) {
+      aboutCar = response;
+      if (aboutCar.status === 500) {
+        carBroken(aboutCar);
+        
+      }
+    }
   }
 };
+
 fetchRequest(GET_URL);
