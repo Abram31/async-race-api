@@ -2,6 +2,7 @@
 import carBroken from '../animation/car-broken';
 import carStop from '../animation/car-broken';
 import { IcarsCreate, mainH3 } from '../markup/body/body';
+import { IdataWinners } from '../winners/save-winners';
 
 export interface IBase_URL {
   baseUrl: string;
@@ -25,7 +26,7 @@ export const GET_URL: IBase_URL = {
 // eslint-disable-next-line import/no-mutable-exports
 export let BASE_DATA: IcarsCreate[];
 // eslint-disable-next-line import/no-mutable-exports
-export let aboutCar: IcarsCreate | Response;
+export let aboutCar: IcarsCreate | Response | IdataWinners;
 
 export const fetchRequest = async ({
   baseUrl,
@@ -56,13 +57,13 @@ export const fetchRequest = async ({
     }
   } catch {
     if (response instanceof Response) {
-      aboutCar = response;
-      if (aboutCar.status === 500) {
+      if (response.status === 500) {
+        aboutCar = response;
         carBroken(aboutCar);
-        
       }
     }
   }
+  return BASE_DATA || aboutCar;
 };
 
 fetchRequest(GET_URL);

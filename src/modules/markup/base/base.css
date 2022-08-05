@@ -1,3 +1,7 @@
+* {
+    list-style: none;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,6 +18,11 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+button {
+    border: 0px;
+    border-radius: 5rem;
+    margin: .2rem 0 0 .5rem;
 }
 .wrapper-cars__page {
     display: none;

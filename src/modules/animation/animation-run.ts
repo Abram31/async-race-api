@@ -2,8 +2,11 @@
 import {
   aboutCar, BASE_DATA, fetchRequest, IBase_URL,
 } from '../fetch/fetch';
+import { addSessionStorage, getSessinoStorage, IData } from '../memories/sessionStorage';
 import highestSpeed from '../winners/highest-speed';
 import distanceReset from './distance-reset';
+// import { addSessionStorage, getSessinoStorage } from '../memories/sessionStorage';
+
 
 interface IanimateRun {
     id: string;
@@ -12,7 +15,7 @@ interface IanimateRun {
     timing: number;
 }
 
-export const speedHistory: Map<string, string> = new Map();
+// export const speedHistory: Map<string, string> = new Map();
 // eslint-disable-next-line import/prefer-default-export
 export function animateRun(event: MouseEvent) {
   // eslint-disable-next-line no-unused-vars
@@ -48,10 +51,11 @@ export function animateRun(event: MouseEvent) {
   fetchRequest(descriptionStartRequest).then(() => {
     if (!(aboutCar instanceof Response)) {
       const data = aboutCar;
-      speedCar = data.velocity;
+      if (data.velocity) {
+        speedCar = data.velocity;
+      }
       time = (90 / (speedCar / 500)) / 60;
-      speedHistory.set(carId, String(speedCar));
-      console.log(speedHistory);
+      addSessionStorage('Cars-speed', { id: carId, speed: String(speedCar) });
     }
   }).then(async () => {
     await fetchRequest(descriptionDriveRequest);
@@ -65,6 +69,7 @@ export function animateRun(event: MouseEvent) {
       const idAnimation = window.requestAnimationFrame(animation);
       animationDiv.id = `Animation № ${idAnimation}`;
     } else {
+      const speedHistory: IData[] = getSessinoStorage('Cars-speed');
       highestSpeed(speedHistory);
     }
   };

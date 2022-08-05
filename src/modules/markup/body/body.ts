@@ -6,6 +6,7 @@ import distanceReset from '../../animation/distance-reset';
 import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../fetch/fetch';
+import { showGaragePage } from '../../garage/garage-page';
 import { createDomNode } from '../base/base';
 import pagination from '../footer/pagination';
 import { createNewCar, selectCar, updateCar } from '../header/menu/create-update';
@@ -50,6 +51,9 @@ body.addEventListener('click', (event) => {
   if (element.classList.contains('menu-wrapper-update__button')) {
     updateCar(event);
   }
+  if (element.classList.contains('wrapper-buttons-garage-winners__button-garage')) {
+    showGaragePage(event);
+  }
 });
 
 const descriptionMain = {
@@ -85,10 +89,10 @@ const wrapperCars = createDomNode(descriptionWrapperCars) as HTMLDivElement;
 // -----------------------------------CAR ----------------------
 
 export interface IcarsCreate {
-  id: number;
-  color: string;
-  name: string;
-  velocity: number;
+  id?: number;
+  color?: string;
+  name?: string;
+  velocity?: number;
 }
 
 export const carsCreate = (data: IcarsCreate[]) => {

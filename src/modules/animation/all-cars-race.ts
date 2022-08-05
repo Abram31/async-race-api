@@ -1,4 +1,5 @@
 const allCarsRun = () => {
+  sessionStorage.removeItem('Cars-speed');
   const pageNumber = (document.querySelector('.title-page') as HTMLHRElement).textContent?.split(' ').slice(-1);
   const currentPage = document.getElementById(`Page № ${pageNumber}`) as HTMLElement;
   const allCarSections = currentPage?.querySelectorAll('section');
