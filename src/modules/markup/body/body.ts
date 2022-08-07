@@ -6,7 +6,7 @@ import distanceReset from '../../animation/distance-reset';
 import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../fetch/fetch';
-import { showGaragePage } from '../../garage/garage-page';
+import { showGaragePage } from '../../garage/winners-page';
 import { createDomNode } from '../base/base';
 import pagination from '../footer/pagination';
 import { createNewCar, selectCar, updateCar } from '../header/menu/create-update';
@@ -51,7 +51,8 @@ body.addEventListener('click', (event) => {
   if (element.classList.contains('menu-wrapper-update__button')) {
     updateCar(event);
   }
-  if (element.classList.contains('wrapper-buttons-garage-winners__button-garage')) {
+  if (element.classList.contains('wrapper-buttons-garage-winners__button-garage') 
+    || element.classList.contains('wrapper-buttons-garage-winners__button-winners')) {
     showGaragePage(event);
   }
 });
@@ -100,8 +101,8 @@ export const carsCreate = (data: IcarsCreate[]) => {
   let currentPage: HTMLElement;
   if (data) {
     data.forEach(({ id, color, name }: IcarsCreate, index: number) => {
-      if (index === 0 || index % 6 === 0) {
-        const pageNumber = (index / 6) + 1;
+      if (index === 0 || index % 7 === 0) {
+        const pageNumber = (index / 7) + 1;
         const descriptionPage = {
           id: `Page № ${pageNumber}`,
           typeElement: 'section',

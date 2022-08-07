@@ -79,6 +79,10 @@ const updateInputButton = createDomNode(descriptionUpdateButton);
 
 // -----------------------------Create new Car -----------------------------------------------
 
+export interface InewCar {
+  name: string,
+  color: string
+}
 export const createNewCar = (event: MouseEvent) => {
   const inputCreateButton = document.getElementById('input-create-color-button') as HTMLInputElement;
   if ((event.target as HTMLElement).id === 'input-create-color-button') {
@@ -136,12 +140,32 @@ export const updateCar = (event:MouseEvent) => {
   const color = (document.querySelector('.menu-wrapper-update__input-color') as HTMLInputElement).value;
 
   const selectElement = main.querySelector('.on');
-  const sectionCar = selectElement?.closest('section');
+  const sectionCar = selectElement?.closest('section') as HTMLElement;
+  const idCar = sectionCar.id;
   const сar = sectionCar?.querySelector('.wrapper-road-car_car') as HTMLDivElement;
   const nameCar = sectionCar?.querySelector('.wrapper-buttons-select-remove__h4') as HTMLDivElement;
   nameCar.textContent = inputValue;
   сar.style.backgroundColor = color;
-  
+
+  const descriptionNewCar: InewCar = {
+    name: inputValue,
+    // eslint-disable-next-line object-shorthand
+    color: color,
+
+  };
+  // eslint-disable-next-line camelcase
+  const PUT_UPDATE_CAR: IBase_URL = {
+    baseUrl: 'http://localhost:3000',
+    additionalURL: `/garage/${Number(idCar)}`,
+    params: {
+      method: 'PUT',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      bodyData: JSON.stringify(descriptionNewCar),
+    },
+  };
+  fetchRequest(PUT_UPDATE_CAR);
   console.log(selectElement);
 };
 

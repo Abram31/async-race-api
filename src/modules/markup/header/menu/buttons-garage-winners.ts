@@ -18,8 +18,8 @@ const inputGarage = createDomNode(descriptionInputGarage);
 
 const descriptionInputUpdate = {
   typeElement: 'button',
-  className: 'wrapper-buttons-garage-winners__button-update',
-  text: 'Update',
+  className: 'wrapper-buttons-garage-winners__button-winners',
+  text: 'Winners',
   parentElement: MenuGarageWinners,
 };
 const inputUpdate = createDomNode(descriptionInputUpdate);
