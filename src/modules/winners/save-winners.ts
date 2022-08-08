@@ -27,7 +27,7 @@ export const saveWinners = async ({ id, time }: IdataWinners) => {
     //   oldData = aboutCar;
     // }
     // if (oldData!) {
-    debugger;
+    
     if (oldData! && oldData.id) {
       const newDataUpdate: IdataWinners = {
         wins: Number(oldData!.wins) + 1,
@@ -38,7 +38,7 @@ export const saveWinners = async ({ id, time }: IdataWinners) => {
           ? Number(time?.toFixed(2))
           : oldData.time,
       };
-      debugger;
+      
       const UPDATE_WINNER: IBase_URL = {
         baseUrl: 'http://localhost:3000',
         additionalURL: `/winners/${id}`,
