@@ -1,3 +1,6 @@
+alert("Привет! Я не успел доделать таск до дедлайна, прошу проверить его позже. Заранее благодарю ☺")
+
+
 import allCarsRun from '../../animation/all-cars-race';
 import allCarsResset from '../../animation/all-cars-reset';
 import { animateRun } from '../../animation/animation-run';
