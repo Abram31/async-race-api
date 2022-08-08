@@ -1,5 +1,3 @@
-alert("Привет! Я не успел доделать таск до дедлайна, прошу проверить его позже. Заранее благодарю ☺")
-
 
 import allCarsRun from '../../animation/all-cars-race';
 import allCarsResset from '../../animation/all-cars-reset';
@@ -40,10 +38,10 @@ body.addEventListener('click', (event) => {
     // distanceReset(event);
   }
   if (element.classList.contains('wrapper-buttons__button-race')) {
-    allCarsRun();
+    allCarsRun(event);
   }
   if (element.classList.contains('wrapper-buttons__button-resset')) {
-    allCarsResset();
+    allCarsResset(event);
   }
   if (element.classList.contains('wrapper-buttons__button-next') || element.classList.contains('wrapper-buttons__button-prev')) {
     pagination(event);
@@ -179,6 +177,8 @@ export const carsCreate = (data: IcarsCreate[]) => {
         parentElement: conteinerStartBack,
       };
       const buttonBack = createDomNode(descriptionBack);
+      buttonBack.style.pointerEvents = 'none';
+      buttonBack.style.backgroundColor = 'grey';
 
       const descriptionWrapperRoadCar = {
         typeElement: 'div',

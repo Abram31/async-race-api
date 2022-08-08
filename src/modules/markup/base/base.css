@@ -24,6 +24,14 @@ button {
     border: 0px;
     border-radius: 5rem;
     margin: .2rem 0 0 .5rem;
+    transition: .4s;
+}
+button:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+button:active {
+    transform: scale(.8);
 }
 
 .wrapper-cars__page {
@@ -70,7 +78,8 @@ button {
     left: 0;
     right: 0;
     /* bottom: 0; */
-    top: 50%;
+    padding-top: 30%;
+        height: 100vh;
     /* display: block; */
     text-align: center;
     font-size: 3rem;

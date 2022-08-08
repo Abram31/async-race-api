@@ -80,7 +80,7 @@ const columns = ['Number', 'Car', 'Name', 'Wins', 'Best time (seconds)'].forEach
   createDomNode(descriptionNameColumn);
 });
 
-const createList = () => {
+export const createList = () => {
   const descriptionUl = {
     typeElement: 'ul',
     className: 'wrapper-list-winners__wrapper-winners',
@@ -96,7 +96,7 @@ const createList = () => {
       return (function recursive() {
         if (currentElement < results.length) {
           if (currentElement % 10 === 0 && currentElement !== 0) {
-            const numberPage = Number((currentElement / 6).toFixed(0)) + 1;
+            const numberPage = Number((currentElement / 6).toFixed(0));
             const descriptionUlPage = {
               typeElement: 'ul',
               className: 'wrapper-list-winners__wrapper-winners',

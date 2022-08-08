@@ -1,4 +1,13 @@
-const allCarsRun = () => {
+const allCarsRun = (event:MouseEvent) => {
+  const element = event.target as HTMLElement;
+  element.style.pointerEvents = 'none';
+  element.style.backgroundColor = 'grey';
+
+  const ressetButton = element.closest('.wrapper-input-elements__wrapper-buttons')
+    ?.querySelector('.wrapper-buttons__button-resset') as HTMLElement;
+  ressetButton.style.pointerEvents = 'auto';
+  ressetButton.style.backgroundColor = 'white';
+
   sessionStorage.removeItem('Cars-speed');
   const pageNumber = (document.querySelector('.title-page') as HTMLHRElement).textContent?.split(' ').slice(-1);
   const currentPage = document.getElementById(`Page № ${pageNumber}`) as HTMLElement;

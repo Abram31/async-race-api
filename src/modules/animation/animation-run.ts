@@ -7,7 +7,6 @@ import highestSpeed from '../winners/highest-speed';
 import distanceReset from './distance-reset';
 // import { addSessionStorage, getSessinoStorage } from '../memories/sessionStorage';
 
-
 interface IanimateRun {
     id: string;
     duration: number;
@@ -23,9 +22,16 @@ export function animateRun(event: MouseEvent) {
   let speedCar: number;
 
   const elem = event.target as HTMLElement;
-  const carId: string = (elem.closest('section') as HTMLElement)?.id;
 
+  elem.style.pointerEvents = 'none';
+  elem.style.backgroundColor = 'grey';
+
+  const carId: string = (elem.closest('section') as HTMLElement)?.id;
   const section = document.getElementById(`${carId}`) as HTMLDivElement;
+
+  const buttonBack = section.querySelector('.wrapper-start-back__button-back') as HTMLElement;
+  buttonBack.style.pointerEvents = 'auto';
+  buttonBack.style.backgroundColor = 'white';
   const animationDiv = section.querySelector('.wrapper-road-car_car') as HTMLDivElement;
   const valFlexBasic = getComputedStyle(animationDiv).flexBasis.slice(0, -1);
   if (Number(valFlexBasic) < 100) {
@@ -70,6 +76,7 @@ export function animateRun(event: MouseEvent) {
       animationDiv.id = `Animation № ${idAnimation}`;
     } else {
       const speedHistory: IData[] = getSessinoStorage('Cars-speed');
+      section.setAttribute('animation', 'end');
       highestSpeed(speedHistory);
     }
   };
