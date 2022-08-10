@@ -15,7 +15,6 @@ const removeCar = (event: MouseEvent) => {
     },
   };
   fetchRequest(DELETE_URL).then(() => {
-    console.log(BASE_DATA);
 
     fetchRequest(GET_URL).then(() => {
       carsCreate(BASE_DATA);
@@ -30,7 +29,6 @@ const removeCar = (event: MouseEvent) => {
     },
   };
   fetchRequest(DELETE_URL_WINNERS).then(() => {
-    console.log(BASE_DATA);
 
     createListWinners();
   });

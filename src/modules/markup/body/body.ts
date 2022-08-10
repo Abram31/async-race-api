@@ -28,13 +28,11 @@ body.addEventListener('click', (event) => {
     if (element.classList.contains('wrapper-start-back__button-start')) {
         const elem = event.target as HTMLElement;
         const carId = elem.closest('section')?.id;
-        console.log(carId);
         animateRun(event);
     }
     if (element.classList.contains('wrapper-start-back__button-back')) {
         const elem = event.target as HTMLElement;
         const carId = elem.closest('section')?.id;
-        console.log(carId);
         carStop(event);
     // distanceReset(event);
     }

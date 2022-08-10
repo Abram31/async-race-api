@@ -216,7 +216,6 @@ export const createListWinners = () => {
             dataSorting = sortingElementsByFastest(data);
         }
 
-        console.log(dataSorting);
 
         addListWinners(dataSorting || data);
     });

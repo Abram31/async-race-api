@@ -6,14 +6,12 @@ const carBroken = (response: Response) => {
   const sectionCar = document.getElementById(idCar) as HTMLElement;
   const car = sectionCar?.querySelector('.wrapper-road-car_car') as HTMLDivElement;
   const numberCarAnimation = car.id.match(/\d+/)![0];
-  console.log(numberCarAnimation);
   deleteSessionStorage('Cars-speed', { id: idCar });
   // debugger
   sectionCar.setAttribute('animation', 'end');
 
   window.cancelAnimationFrame(Number(numberCarAnimation));
   // speedHistory.delete(idCar);
-  // console.log(speedHistory);
 };
 
 export default carBroken;
