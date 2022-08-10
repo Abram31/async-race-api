@@ -8,4 +8,5 @@ import './modules/markup/header/menu/buttons-race-resset-generate';
 import './modules/markup/body/body';
 import './modules/markup/footer/footer';
 
-import './modules/garage/winners-page';
+import './modules/winners/winners-page';
+import './modules/self-check'

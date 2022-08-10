@@ -15,6 +15,7 @@ const descriptionInputGarage = {
   parentElement: MenuGarageWinners,
 };
 const inputGarage = createDomNode(descriptionInputGarage);
+inputGarage.style.backgroundColor = 'red';
 
 const descriptionInputUpdate = {
   typeElement: 'button',

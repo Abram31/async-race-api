@@ -1,7 +1,7 @@
 import {
   BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../../fetch/fetch';
-import { createList } from '../../../garage/winners-page';
+import { createListWinners } from '../../../winners/winners-page';
 import { carsCreate } from '../../body/body';
 
 const removeCar = (event: MouseEvent) => {
@@ -32,7 +32,7 @@ const removeCar = (event: MouseEvent) => {
   fetchRequest(DELETE_URL_WINNERS).then(() => {
     console.log(BASE_DATA);
 
-    createList();
+    createListWinners();
   });
 };
 
