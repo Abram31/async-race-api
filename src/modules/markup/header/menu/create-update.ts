@@ -1,79 +1,79 @@
 import {
-  BASE_DATA, fetchRequest, GET_URL, IBase_URL,
+    BASE_DATA, fetchRequest, GET_URL, IBase_URL,
 } from '../../../fetch/fetch';
 import { createDomNode } from '../../base/base';
 import { carsCreate, main } from '../../body/body';
 import menu from './wrapper-menu';
 
 const descriptionMenuWrapperInputs = {
-  typeElement: 'div',
-  className: 'wrapper-menu__wrapper-input-elements',
-  parentElement: menu,
+    typeElement: 'div',
+    className: 'wrapper-menu__wrapper-input-elements',
+    parentElement: menu,
 };
 export const menuWrapperInputs = createDomNode(descriptionMenuWrapperInputs);
 
 const descriptionMenuWrapperCreate = {
-  typeElement: 'div',
-  className: 'wrapper-input-elements__menu-wrapper-create',
-  parentElement: menuWrapperInputs,
+    typeElement: 'div',
+    className: 'wrapper-input-elements__menu-wrapper-create',
+    parentElement: menuWrapperInputs,
 };
 const menuWrapperCreate = createDomNode(descriptionMenuWrapperCreate);
 
 const descriptionCreateInput = {
-  id: 'input-create',
-  typeElement: 'input',
-  type: 'test',
-  className: 'menu-wrapper-create__input',
-  parentElement: menuWrapperCreate,
+    id: 'input-create',
+    typeElement: 'input',
+    type: 'test',
+    className: 'menu-wrapper-create__input',
+    parentElement: menuWrapperCreate,
 };
 const createInput = createDomNode(descriptionCreateInput);
 
 const descriptionCreateInputColor = {
-  typeElement: 'input',
-  id: 'input-create-color',
-  type: 'color',
-  className: 'menu-wrapper-create__input-color',
-  parentElement: menuWrapperCreate,
+    typeElement: 'input',
+    id: 'input-create-color',
+    type: 'color',
+    className: 'menu-wrapper-create__input-color',
+    parentElement: menuWrapperCreate,
 };
 const createInputColor = createDomNode(descriptionCreateInputColor);
 
 const descriptionCreateButton = {
-  typeElement: 'button',
-  id: 'input-create-color-button',
-  className: 'menu-wrapper-create__button',
-  text: 'Create',
-  parentElement: menuWrapperCreate,
+    typeElement: 'button',
+    id: 'input-create-color-button',
+    className: 'menu-wrapper-create__button',
+    text: 'Create',
+    parentElement: menuWrapperCreate,
 };
 const createInputButton = createDomNode(descriptionCreateButton);
 
 const descriptionMenuWrapperUpdate = {
-  typeElement: 'div',
-  className: 'wrapper-input-elements__menu-wrapper-update',
-  parentElement: menuWrapperInputs,
+    typeElement: 'div',
+    className: 'wrapper-input-elements__menu-wrapper-update',
+    parentElement: menuWrapperInputs,
 };
 const menuWrapperUpdate = createDomNode(descriptionMenuWrapperUpdate);
 
 const descriptionUpdateInput = {
-  typeElement: 'input',
-  type: 'test',
-  className: 'menu-wrapper-update__input',
-  parentElement: menuWrapperUpdate,
+    typeElement: 'input',
+    type: 'test',
+    className: 'menu-wrapper-update__input',
+    parentElement: menuWrapperUpdate,
 };
 const updateInput = createDomNode(descriptionUpdateInput);
 
 const descriptionUpdateInputColor = {
-  typeElement: 'input',
-  type: 'color',
-  className: 'menu-wrapper-update__input-color',
-  parentElement: menuWrapperUpdate,
+    typeElement: 'input',
+    type: 'color',
+    className: 'menu-wrapper-update__input-color',
+    parentElement: menuWrapperUpdate,
 };
 const updateInputColor = createDomNode(descriptionUpdateInputColor);
 
 const descriptionUpdateButton = {
-  typeElement: 'button',
-  className: 'menu-wrapper-update__button',
-  text: 'Update',
-  parentElement: menuWrapperUpdate,
+    typeElement: 'button',
+    className: 'menu-wrapper-update__button',
+    text: 'Update',
+    parentElement: menuWrapperUpdate,
 };
 const updateInputButton = createDomNode(descriptionUpdateButton);
 
@@ -84,86 +84,101 @@ export interface InewCar {
   color: string
 }
 export const createNewCar = (event: MouseEvent) => {
-  const inputCreateButton = document.getElementById('input-create-color-button') as HTMLInputElement;
-  if ((event.target as HTMLElement).id === 'input-create-color-button') {
-    const inputCreate = document.getElementById('input-create') as HTMLInputElement;
+    const inputCreateButton = document.getElementById('input-create-color-button') as HTMLInputElement;
+    if ((event.target as HTMLElement).id === 'input-create-color-button') {
+        const inputCreate = document.getElementById('input-create') as HTMLInputElement;
 
-    const inputCreateColor: HTMLInputElement = document.getElementById('input-create-color') as HTMLInputElement;
+        const inputCreateColor: HTMLInputElement = document.getElementById('input-create-color') as HTMLInputElement;
 
-    const propetiesNewCar = {
-      name: inputCreate.value,
-      color: inputCreateColor.value,
-    };
+        const propetiesNewCar = {
+            name: inputCreate.value,
+            color: inputCreateColor.value,
+        };
 
-    // eslint-disable-next-line camelcase
-    const create_POST_REQUEST: IBase_URL = {
-      baseUrl: 'http://localhost:3000',
-      additionalURL: '/garage',
-      params: {
-        method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        bodyData: JSON.stringify(propetiesNewCar),
-      },
-    };
-    fetchRequest(create_POST_REQUEST).then(() => {
-      fetchRequest(GET_URL).then(() => {
-        carsCreate(BASE_DATA);
-      });
-    });
-  }
-  return event;
+        // eslint-disable-next-line camelcase
+        const create_POST_REQUEST: IBase_URL = {
+            baseUrl: 'http://localhost:3000',
+            additionalURL: '/garage',
+            params: {
+                method: 'POST',
+                header: { 'Content-Type': 'application/json' },
+                bodyData: JSON.stringify(propetiesNewCar),
+            },
+        };
+        fetchRequest(create_POST_REQUEST).then(() => {
+            fetchRequest(GET_URL).then(() => {
+                carsCreate(BASE_DATA);
+            });
+        });
+    }
+    return event;
 };
 
 export const selectCar = (event: MouseEvent) => {
-  const selectButton = event.target as HTMLElement;
-  const allSelectButtons = document.querySelectorAll('.wrapper-buttons-select-remove__select');
-  if (!selectButton.classList.contains('on')) {
-    allSelectButtons?.forEach((select) => {
-      (select as HTMLElement).classList.remove('on');
-      // eslint-disable-next-line no-param-reassign
-      (select as HTMLElement).style.background = 'white';
-    });
-    selectButton.classList.add('on');
-    selectButton.style.background = 'red';
-  } else {
-    selectButton.classList.remove('on');
-    selectButton.style.background = 'white';
-  }
-  const carId = selectButton.closest('section')?.id;
+    const selectButton = event.target as HTMLElement;
+    const section = selectButton.closest('section') as HTMLElement;
+    const inputUpdate = (document.querySelector('.menu-wrapper-update__input') as HTMLInputElement);
+    const inputColor = (document.querySelector('.menu-wrapper-update__input-color') as HTMLInputElement);
+    const nameCar = (section.querySelector('.wrapper-buttons-select-remove__h4') as HTMLElement).innerText;
+    const car = (section.querySelector('.wrapper-road-car_car') as HTMLElement);
+    const color = car.style.backgroundColor;
+    // console.log(inputUpdate.value);
+
+    // inputUpdate.value = nameCar;
+    // // inputColor.value = color;
+    // inputColor.addEventListener('change', () => {
+    //     color = inputColor.value;
+    //     console.log(inputColor.value);
+    // });
+
+    const allSelectButtons = document.querySelectorAll('.wrapper-buttons-select-remove__select');
+    if (!selectButton.classList.contains('on')) {
+        allSelectButtons?.forEach((select) => {
+            (select as HTMLElement).classList.remove('on');
+            // eslint-disable-next-line no-param-reassign
+            (select as HTMLElement).style.background = 'white';
+        });
+        selectButton.classList.add('on');
+        selectButton.style.background = 'red';
+    } else {
+        selectButton.classList.remove('on');
+        selectButton.style.background = 'white';
+    }
+    const carId = selectButton.closest('section')?.id;
 };
 
 export const updateCar = (event:MouseEvent) => {
-  const butonUpdate = event.target as HTMLElement;
-  const inputValue = (document.querySelector('.menu-wrapper-update__input') as HTMLInputElement).value;
-  const color = (document.querySelector('.menu-wrapper-update__input-color') as HTMLInputElement).value;
+    const butonUpdate = event.target as HTMLElement;
+    const inputValue = (document.querySelector('.menu-wrapper-update__input') as HTMLInputElement).value;
+    const color = (document.querySelector('.menu-wrapper-update__input-color') as HTMLInputElement).value;
 
-  const selectElement = main.querySelector('.on');
-  const sectionCar = selectElement?.closest('section') as HTMLElement;
-  const idCar = sectionCar.id;
-  const сar = sectionCar?.querySelector('.wrapper-road-car_car') as HTMLDivElement;
-  const nameCar = sectionCar?.querySelector('.wrapper-buttons-select-remove__h4') as HTMLDivElement;
-  nameCar.textContent = inputValue;
-  сar.style.backgroundColor = color;
+    const selectElement = main.querySelector('.on');
+    const sectionCar = selectElement?.closest('section') as HTMLElement;
+    const idCar = sectionCar.id;
+    const сar = sectionCar?.querySelector('.wrapper-road-car_car') as HTMLDivElement;
+    const nameCar = sectionCar?.querySelector('.wrapper-buttons-select-remove__h4') as HTMLDivElement;
+    nameCar.textContent = inputValue;
+    сar.style.backgroundColor = color;
 
-  const descriptionNewCar: InewCar = {
-    name: inputValue,
-    // eslint-disable-next-line object-shorthand
-    color: color,
+    const descriptionNewCar: InewCar = {
+        name: inputValue,
+        // eslint-disable-next-line object-shorthand
+        color: color,
 
-  };
-  // eslint-disable-next-line camelcase
-  const PUT_UPDATE_CAR: IBase_URL = {
-    baseUrl: 'http://localhost:3000',
-    additionalURL: `/garage/${Number(idCar)}`,
-    params: {
-      method: 'PUT',
-      header: {
-        'Content-Type': 'application/json',
-      },
-      bodyData: JSON.stringify(descriptionNewCar),
-    },
-  };
-  fetchRequest(PUT_UPDATE_CAR);
+    };
+    // eslint-disable-next-line camelcase
+    const PUT_UPDATE_CAR: IBase_URL = {
+        baseUrl: 'http://localhost:3000',
+        additionalURL: `/garage/${Number(idCar)}`,
+        params: {
+            method: 'PUT',
+            header: {
+                'Content-Type': 'application/json',
+            },
+            bodyData: JSON.stringify(descriptionNewCar),
+        },
+    };
+    fetchRequest(PUT_UPDATE_CAR);
 };
 
 // --------------------------------Delete Car --------------------------------------------------------------------
