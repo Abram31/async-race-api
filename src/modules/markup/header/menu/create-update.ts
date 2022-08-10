@@ -87,10 +87,8 @@ export const createNewCar = (event: MouseEvent) => {
   const inputCreateButton = document.getElementById('input-create-color-button') as HTMLInputElement;
   if ((event.target as HTMLElement).id === 'input-create-color-button') {
     const inputCreate = document.getElementById('input-create') as HTMLInputElement;
-    console.log(inputCreate.value);
 
     const inputCreateColor: HTMLInputElement = document.getElementById('input-create-color') as HTMLInputElement;
-    console.log(inputCreateColor.value);
 
     const propetiesNewCar = {
       name: inputCreate.value,
@@ -166,7 +164,6 @@ export const updateCar = (event:MouseEvent) => {
     },
   };
   fetchRequest(PUT_UPDATE_CAR);
-  console.log(selectElement);
 };
 
 // --------------------------------Delete Car --------------------------------------------------------------------

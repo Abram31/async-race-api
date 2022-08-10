@@ -1,6 +1,7 @@
 export interface IData {
-    id: string;
+    id?: string;
     speed?: string;
+    sorting?: string;
 }
 export declare const addSessionStorage: (title: string, data: IData) => void;
 export declare const deleteSessionStorage: (title: string, data: IData) => void;

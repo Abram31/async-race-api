@@ -25,6 +25,8 @@ const descriptionRessetButton = {
   parentElement: menuWrapperButtonsRasResGen,
 };
 const buttonResset = createDomNode(descriptionRessetButton);
+buttonResset.style.pointerEvents = 'none';
+buttonResset.style.backgroundColor = 'grey';
 
 const descriptionGenerateCarsButton = {
   typeElement: 'button',

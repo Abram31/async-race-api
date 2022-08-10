@@ -2,6 +2,7 @@
     list-style: none;
 }
 
+
 body {
     display: flex;
     flex-direction: column;
@@ -24,6 +25,20 @@ button {
     border: 0px;
     border-radius: 5rem;
     margin: .2rem 0 0 .5rem;
+    transition: .4s;
+}
+
+button:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.8);
+}
+
+input {
+    border-radius: 10rem;
 }
 
 .wrapper-cars__page {
@@ -70,7 +85,8 @@ button {
     left: 0;
     right: 0;
     /* bottom: 0; */
-    top: 50%;
+    /* padding-top: 30%; */
+    height: 100vh;
     /* display: block; */
     text-align: center;
     font-size: 3rem;
@@ -78,7 +94,9 @@ button {
     color: #b84b25;
 }
 
-
+.wrapper-buttons-select-remove__h4 {
+    padding: 0 0 0 1rem;
+}
 
 
 /* -------------------------------Carage ---------------------------------
@@ -96,6 +114,7 @@ button {
     padding: 0;
     margin: 0;
     flex-basis: 100%;
+    display: none;
 
 
 }
@@ -103,6 +122,7 @@ button {
 .wrapper-list-winners__names-columns {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 2fr;
+    align-items: center;
     background-color: #10101094;
     font-weight: 800;
     border-radius: 1rem;
@@ -116,6 +136,33 @@ button {
     align-items: center;
     padding: 0 0 0 0.3rem;
 }
+
+
+
+
+.names-columns__wins,
+.names-columns__wins__active,
+.names-columns__best-time,
+.names-columns__best-time__active {
+    cursor: pointer;
+}
+
+.names-columns__wins__active::after,
+.names-columns__wins:after,
+.names-columns__best-time:after,
+.names-columns__best-time__active:after {
+    content: '↑';
+    font-size: 1.5rem;
+    color: #cc1a5e;
+    padding: 0 0 0 .5rem;
+}
+
+.names-columns__wins:after,
+.names-columns__best-time:after {
+    content: '↓';
+
+}
+
 
 .winner__car-img {
     height: 2rem;
